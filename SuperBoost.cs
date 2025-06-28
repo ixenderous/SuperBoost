@@ -4,6 +4,7 @@ using BTD_Mod_Helper.Extensions;
 using Il2CppAssets.Scripts.Models;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Abilities;
 using Il2CppAssets.Scripts.Models.Towers.Behaviors.Abilities.Behaviors;
+using Il2CppAssets.Scripts.Unity.UI_New.InGame;
 using SuperBoost;
 
 [assembly: MelonInfo(typeof(SuperBoost.SuperBoost), ModHelperData.Name, ModHelperData.Version, ModHelperData.RepoOwner)]
@@ -22,9 +23,9 @@ public class SuperBoost : BloonsTD6Mod
     {
         base.OnNewGameModel(result);
 
-        if (!Settings.ModEnabled) return;
+        if (!Settings.ModEnabled || !InGameData.CurrentGame.IsSandbox) return;
 
-        MelonLogger.Msg("Applying SuperBoost...");
+        ModHelper.Msg<SuperBoost>("Applying SuperBoost...");
 
         foreach (var engineer in result.GetTowersWithBaseId("EngineerMonkey"))
         {
